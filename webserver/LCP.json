@@ -23,7 +23,7 @@
     },
     "initialDelaySeconds": 60,
     "timeoutSeconds": 10,
-    "failureThreshold": 20
+    "failureThreshold": 10
   },
   "volumes": {
     "data": "/data"
