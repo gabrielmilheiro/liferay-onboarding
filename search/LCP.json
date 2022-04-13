@@ -1,0 +1,41 @@
+{
+  "kind":"StatefulSet",
+  "id": "search",
+  "image": "liferaycloud/elasticsearch:6.8.23-4.1.5",
+  "cpu": 8,
+  "memory": 8192,
+  "ports": [
+    {
+      "port": 9300,
+      "external": false
+    },
+    {
+      "port": 9200,
+      "external": false
+    }
+  ],
+  "readinessProbe": {
+    "httpGet": {
+      "path": "/",
+      "port": 9200
+    },
+    "timeoutSeconds": 1,
+    "successThreshold": 3
+  },
+  "livenessProbe": {
+    "httpGet": {
+      "path": "/_cluster/health",
+      "port": 9200
+    },
+    "initialDelaySeconds": 300,
+    "timeoutSeconds": 5
+  },
+  "env": {
+    "ES_JAVA_OPTS": "-Xms6g -Xmx6g -Dlog4j2.formatMsgNoLookups=true"
+  },
+  "environments": {
+    "infra": {
+      "deploy": false
+    }
+  }
+}
